@@ -1,0 +1,11 @@
+{
+  "name": "US Corn Yield Geospatial",
+  "summary": "County-level US corn yield (2005-2024) from USDA NASS joined to Census boundaries via GeoPandas, cleaned into a Tableau-Public-ready dataset.",
+  "image": "https://raw.githubusercontent.com/UgoBruzadin/usda-crop-yield-geospatial/main/figures/choropleth_latest_year.png",
+  "tags": ["GeoPandas", "Geospatial", "USDA NASS", "Census TIGER", "Tableau", "Python", "EDA"],
+  "why": "A quick, self-contained geospatial data engineering project to demonstrate pulling, cleaning, and spatially joining real government data end to end, and shipping it as a dataset ready for a BI tool rather than stopping at a notebook.",
+  "problem": "USDA crop yield statistics and Census county boundaries live in separate systems with no shared key exposed to end users; turning them into a single clean, join-ready file for mapping/BI requires reconciling FIPS codes, handling NASS's undisclosed-county rows, and keeping file size sane for tools like Tableau Public.",
+  "approach": "Streamed USDA NASS's keyless bulk crops flat file (~1GB gzipped) and filtered on the fly to county-level corn grain yield (BU/ACRE, 2005-2024) without ever storing the full file; downloaded 2018 Census cartographic county boundaries; joined on 5-digit FIPS; split the output into a lightweight one-row-per-county boundaries GeoJSON plus a full county-year CSV panel (instead of one bloated 215MB GeoJSON) to keep the Tableau handoff practical; validated the join and findings in an executed Jupyter notebook with static choropleth previews.",
+  "results": "31,441 county-year rows across 2,248 counties and 41 states, 0 unmatched FIPS after excluding NASS's ~7% 'OTHER COMBINED COUNTIES' catch-all rows. County-average yield rose ~+2.25 bu/acre/year (+25% over the window); the 2012 Midwest drought is clearly recovered from the data (-9.8% yoy, then +30.6% rebound in 2013); irrigated western counties (WA, ID, NE, TX Panhandle) average 200+ bu/acre versus 50-65 bu/acre in marginal dryland Great Plains counties.",
+  "stack": ["Python", "GeoPandas", "Pandas", "Shapely", "Pyogrio", "Matplotlib", "Jupyter", "Tableau Public"]
+}
