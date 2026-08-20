@@ -121,10 +121,6 @@ Real, executed EDA + sanity-check maps. Headline findings:
 
 ## Building the Tableau Public dashboard
 
-This part is on you -- publishing to Tableau Public requires your own
-free Tableau Public account and the Tableau Public Desktop app (both
-outside what this pipeline can automate).
-
 1. Install **Tableau Public Desktop** (free) and open it.
 2. **Connect > Spatial file** and point it at
    `data/processed/county_boundaries.geojson`.
